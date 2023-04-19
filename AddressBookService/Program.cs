@@ -8,5 +8,9 @@ class Program
     {
         Operation operation = new Operation();
         operation.GetAllAddressBookRecords();
+        /*AddressBookDetails details = new AddressBookDetails();
+        operation.AddAddressDetails(details);
+        operation.DeleteAddressBook(id);
+        operation.UpdateAddressBook(1, "Askar");*/
     }
 }
