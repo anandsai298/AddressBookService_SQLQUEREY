@@ -49,10 +49,18 @@ PersonId int Primary Key identity(1,1),
 PersonName varchar(20),
 RelationType varchar(20),
 );
-insert into PersonType(PersonName,RelationType) values('Yash','Friend');
+alter table PersonType drop FK__PersonTyp__Relat__5CD6CB2B;
+alter table PersonType drop column RelateType;
+alter table PersonType Add Id int foreign Key REFERENCES AddressBook(PersonId);
+insert into PersonType(PersonName,RelationType,Id) values('Yash','Friend',1);
+insert into PersonType(PersonName,RelationType,Id) values('Yash','Family',1);
 insert into PersonType(PersonName,RelationType) values('Satish','Friend');
 insert into PersonType(PersonName,RelationType) values('Sainag','Family');
 insert into PersonType(PersonName,RelationType) values('Phani','Profession');
+
+delete from PersonType where PersonId=8;
+delete from PersonType where PersonId=9;
+delete from PersonType where PersonId=1;
 
 select * from PersonType;
 
@@ -63,7 +71,8 @@ select count(RelationType)from PersonType where RelationType='Profession' group 
 
 --UC11-Ability to add person to both Friend and Family
 insert into PersonType(PersonName,RelationType) values('Kiran','Family');
-insert into PersonType(PersonName,RelationType) values('Harsha','Profession');
+insert into PersonType(PersonName,RelationType) values('Kiran','Friend');
+delete from PersonType where PersonName='Kiran';
 
 
 
