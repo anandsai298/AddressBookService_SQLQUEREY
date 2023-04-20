@@ -24,6 +24,8 @@ Insert into AddressBook(Firstname,Lastname,Address,City,State,ZipCode,PHNO,Email
 
 --UC4-Retrive,Edit
 select * from AddressBook;
+alter table AddressBook drop FK__AddressBo__Relat__5BE2A6F2;
+alter table AddressBook drop column RelateType;
 update AddressBook set Firstname='Askar' where Firstname='Anand';
 update AddressBook set Firstname='Anandsai' where Firstname='Sai';
 update AddressBook set Firstname='Anandsaikumar' where Firstname='Vijaya';
@@ -31,6 +33,7 @@ update AddressBook set Lastname='Vijayarowthu' where Lastname='Rowthu';
 
 --UC5-Delete
 delete from AddressBook where PersonId=2;
+update AddressBook set Firstname='Sai',Lastname='Rowthu',Address='Sarpavaram',City='Kakinada',State='AP',ZipCode=58000,PHNO='9874561234',EmailId='sai@gmail.com' where PersonId=2;
 
 --UC6-Retrive
 select * from AddressBook where City='Kakinada' or State='Telengana';
@@ -73,6 +76,46 @@ select count(RelationType)from PersonType where RelationType='Profession' group 
 insert into PersonType(PersonName,RelationType) values('Kiran','Family');
 insert into PersonType(PersonName,RelationType) values('Kiran','Friend');
 delete from PersonType where PersonName='Kiran';
+
+--UC12-Storedprocedure
+Create Procedure AddAddressDetails
+(
+@FirstName varchar(30),
+@LastName varchar(30),
+@Address varchar(30),
+@City varchar(20),
+@State varchar(15),
+@ZipCode Bigint,
+@PHNO varchar(10),
+@EmailId varchar(30)
+)
+As
+Begin
+insert into AddressBook values(@FirstName,@LastName,@Address,@City,@State,@Address,@ZipCode,@PHNO,@EmailId);
+End
+
+--UC13-Delete procedure
+Create Procedure DeleteAddressBook
+(
+@PersonId int
+)
+As 
+Begin
+Delete from AddressBook where PersonId=@PersonId;
+End
+
+--UC14-Update
+Create Procedure UpdateAddressBook
+(
+@PersonId int,
+@FirstName varchar(30)
+)
+As
+Begin
+Update AddressBook set FirstName=@FirstName where PersonId=@PersonId;
+End
+
+
 
 
 

@@ -50,16 +50,14 @@ namespace AddressBookService
                 this.connection.Close();
             }
         }
-        public void AddAddressDetails(AddressBookDetails addressdetails)
+        public void AddAddressDetails(AddressBookDetails addressBookDetails)
         {
             try
             {
-                AddressBookDetails addressBookDetails = new AddressBookDetails();
                 using (this.connection)
                 {
                     SqlCommand cmd = new SqlCommand("AddAddressDetails", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    this.connection.Open();
                     cmd.Parameters.AddWithValue("@Firstname", addressBookDetails.Firstname);
                     cmd.Parameters.AddWithValue("@Lastname", addressBookDetails.Lastname);
                     cmd.Parameters.AddWithValue("@Address", addressBookDetails.Address);
@@ -68,7 +66,9 @@ namespace AddressBookService
                     cmd.Parameters.AddWithValue("@ZipCode", addressBookDetails.ZipCode);
                     cmd.Parameters.AddWithValue("@PHNO", addressBookDetails.PHNO);
                     cmd.Parameters.AddWithValue("@EmailId", addressBookDetails.EmailId);
+                    this.connection.Open();
                     int RowsEffected = cmd.ExecuteNonQuery();
+                    this.connection.Close();
                     SqlDataReader reader = cmd.ExecuteReader();
                     if (RowsEffected > 0)
                         Console.WriteLine("ADRESSBOOK Added successfully");
@@ -79,10 +79,6 @@ namespace AddressBookService
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                this.connection.Close();
             }
         }
         public void DeleteAddressBook(int ID)
