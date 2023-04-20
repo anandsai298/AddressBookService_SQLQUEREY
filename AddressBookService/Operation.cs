@@ -69,7 +69,6 @@ namespace AddressBookService
                     this.connection.Open();
                     int RowsEffected = cmd.ExecuteNonQuery();
                     this.connection.Close();
-                    SqlDataReader reader = cmd.ExecuteReader();
                     if (RowsEffected > 0)
                         Console.WriteLine("ADRESSBOOK Added successfully");
                     else
@@ -90,10 +89,10 @@ namespace AddressBookService
                 {
                     SqlCommand cmd = new SqlCommand("DeleteAddressBook", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    this.connection.Open();
                     cmd.Parameters.AddWithValue("@PersonId", ID);
+                    this.connection.Open();
                     int RowsEffected = cmd.ExecuteNonQuery();
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    this.connection.Close();
                     if (RowsEffected > 0)
                         Console.WriteLine("ADRESSBOOK Deleted successfully");
                     else
@@ -104,25 +103,20 @@ namespace AddressBookService
             {
                 throw new Exception(ex.Message);
             }
-            finally
-            {
-                this.connection.Close();
-            }
         }
         public void UpdateAddressBook(int ID,string Name)
         {
             try
             {
-                AddressBookDetails addressBookDetails = new AddressBookDetails();
                 using (this.connection)
                 {
                     SqlCommand cmd = new SqlCommand("UpdateAddressBook", connection);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    this.connection.Open();
                     cmd.Parameters.AddWithValue("@PersonId", ID);
                     cmd.Parameters.AddWithValue("@FirstName", Name);
+                    this.connection.Open();
                     int RowsEffected = cmd.ExecuteNonQuery();
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    this.connection.Close();
                     if (RowsEffected > 0)
                         Console.WriteLine("ADRESSBOOK Updated successfully");
                     else
@@ -132,10 +126,6 @@ namespace AddressBookService
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-            finally
-            {
-                this.connection.Close();
             }
         }
     }
