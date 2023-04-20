@@ -19,5 +19,8 @@ namespace AddressBookService
         public int ZipCode { get; set; }
         public string PHNO { get; set; }
         public string EmailId { get; set; }
+        public string PersonName { get; set; }
+        public string RelationType { get; set; }
+        public int Id { get; set; }
     }
 }

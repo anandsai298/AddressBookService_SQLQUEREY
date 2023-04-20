@@ -7,10 +7,11 @@ class Program
     static void Main(string[] args)
     {
         Operation operation = new Operation();
+        OperationPersonType operationPersonType = new OperationPersonType();
         bool flag = true;
         while (flag)
         {
-            Console.WriteLine("1.GetAllAddressBookRecords\n2.AddAddressDetails\n3.DeleteAddressBook\n4.UpdateAddressBook");
+            Console.WriteLine("1.GetAllAddressBookRecords\n2.AddAddressDetails\n3.DeleteAddressBook\n4.UpdateAddressBook\n5.GetAllPersonTypeRecords");
             Console.WriteLine("enter option:");
             int option=Convert.ToInt32(Console.ReadLine());
             switch(option)
@@ -38,9 +39,9 @@ class Program
                 case 4:
                     operation.UpdateAddressBook(1, "Ajith");
                     break;
-
-
-
+                case 5:
+                    operationPersonType.GetAllPersonTypeRecords();
+                    break;
             }
         }
     }
