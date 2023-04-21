@@ -77,6 +77,10 @@ insert into PersonType(PersonName,RelationType) values('Kiran','Family');
 insert into PersonType(PersonName,RelationType) values('Kiran','Friend');
 delete from PersonType where PersonName='Kiran';
 
+--IDENTITY_INSERT
+set IDENTITY_INSERT AddressBook ON
+set IDENTITY_INSERT AddressBook OFF
+
 --UC12-Storedprocedure
 Create Procedure AddAddressDetails
 (
@@ -91,7 +95,7 @@ Create Procedure AddAddressDetails
 )
 As
 Begin
-insert into AddressBook values(@FirstName,@LastName,@Address,@City,@State,@Address,@ZipCode,@PHNO,@EmailId);
+insert into AddressBook values(@FirstName,@LastName,@Address,@City,@State,@ZipCode,@PHNO,@EmailId);
 End
 
 --UC13-Delete procedure
