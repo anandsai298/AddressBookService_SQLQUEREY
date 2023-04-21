@@ -39,7 +39,7 @@ namespace AddressBookService
                             addressBookDetails.EmailId = reader.GetString(8);
                             Console.WriteLine(addressBookDetails.PersonId + "\n" + addressBookDetails.Firstname + "\n" + addressBookDetails.Lastname + "\n" + addressBookDetails.Address + "\n" + addressBookDetails.City + "\n" + addressBookDetails.State + "\n" + addressBookDetails.ZipCode + "\n" + addressBookDetails.PHNO + "\n" + addressBookDetails.EmailId);
                         }
-                    }
+                    } 
                     
                     else
                     { Console.WriteLine("No Records are AVAILABLE"); }
