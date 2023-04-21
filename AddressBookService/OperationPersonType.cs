@@ -24,13 +24,17 @@ namespace AddressBookService
                     cmd.CommandType=CommandType.Text;
                     this.connection.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if (reader.Read())
+                    if (reader.HasRows)
                     {
-                        addressBookDetails.PersonId = reader.GetInt32(0);
-                        addressBookDetails.PersonName = reader.GetString(1);
-                        addressBookDetails.RelationType = reader.GetString(2);
-                        addressBookDetails.Id = reader.GetInt32(3);
-                        Console.WriteLine(addressBookDetails.PersonId + "\n" + addressBookDetails.PersonName + "\n" + addressBookDetails.RelationType + "\n" + addressBookDetails.Id);
+                        while(reader.Read())
+                        {
+                            addressBookDetails.PersonId = reader.GetInt32(0);
+                            addressBookDetails.PersonName = reader.GetString(1);
+                            addressBookDetails.RelationType = reader.GetString(2);
+                            addressBookDetails.Id = reader.GetInt32(3);
+                            Console.WriteLine(addressBookDetails.PersonId + "\n" + addressBookDetails.PersonName + "\n" + addressBookDetails.RelationType + "\n" + addressBookDetails.Id);
+                        }
+                        
                     }
                     else
                     { Console.WriteLine("No Records are AVAILABLE"); }
