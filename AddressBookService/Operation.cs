@@ -24,23 +24,28 @@ namespace AddressBookService
                     cmd.CommandType = CommandType.Text;
                     this.connection.Open();
                     SqlDataReader reader = cmd.ExecuteReader();
-                    if(reader.HasRows)
+                    //HEAD
+                    if (reader.HasRows)
                     {
                         while (reader.Read())
-                        {
-                            addressBookDetails.PersonId = reader.GetInt32(0);
-                            addressBookDetails.Firstname = reader.GetString(1);
-                            addressBookDetails.Lastname = reader.GetString(2);
-                            addressBookDetails.Address = reader.GetString(3);
-                            addressBookDetails.City = reader.GetString(4);
-                            addressBookDetails.State = reader.GetString(5);
-                            addressBookDetails.ZipCode = (int)reader.GetInt64(6);
-                            addressBookDetails.PHNO = reader.GetString(7);
-                            addressBookDetails.EmailId = reader.GetString(8);
-                            Console.WriteLine(addressBookDetails.PersonId + "\n" + addressBookDetails.Firstname + "\n" + addressBookDetails.Lastname + "\n" + addressBookDetails.Address + "\n" + addressBookDetails.City + "\n" + addressBookDetails.State + "\n" + addressBookDetails.ZipCode + "\n" + addressBookDetails.PHNO + "\n" + addressBookDetails.EmailId);
-                        }
-                    } 
-                    
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                //UC2-GetAllPersonTypeRecords
+                                {
+                                    addressBookDetails.PersonId = reader.GetInt32(0);
+                                    addressBookDetails.Firstname = reader.GetString(1);
+                                    addressBookDetails.Lastname = reader.GetString(2);
+                                    addressBookDetails.Address = reader.GetString(3);
+                                    addressBookDetails.City = reader.GetString(4);
+                                    addressBookDetails.State = reader.GetString(5);
+                                    addressBookDetails.ZipCode = (int)reader.GetInt64(6);
+                                    addressBookDetails.PHNO = reader.GetString(7);
+                                    addressBookDetails.EmailId = reader.GetString(8);
+                                    Console.WriteLine(addressBookDetails.PersonId + "\n" + addressBookDetails.Firstname + "\n" + addressBookDetails.Lastname + "\n" + addressBookDetails.Address + "\n" + addressBookDetails.City + "\n" + addressBookDetails.State + "\n" + addressBookDetails.ZipCode + "\n" + addressBookDetails.PHNO + "\n" + addressBookDetails.EmailId);
+                                }
+                            }
+                    }
                     else
                     { Console.WriteLine("No Records are AVAILABLE"); }
                 }
@@ -131,6 +136,20 @@ namespace AddressBookService
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public List<AddressBookDetails> Personlist = new List<AddressBookDetails>();
+        public void AddPersonToAddressBook(List<AddressBookDetails> Personlist)
+        {
+            Personlist.ForEach(PersonData =>
+            {
+                Console.WriteLine("Person is being adding to List : " + PersonData.Firstname);
+                this.AddPerson(PersonData);
+                Console.WriteLine("Person is added: " + PersonData.Firstname);
+            }) ;
+        }
+        public void AddPerson(AddressBookDetails Person)
+        {
+            Personlist.Add(Person);
         }
     }
 }

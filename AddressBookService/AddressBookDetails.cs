@@ -22,5 +22,30 @@ namespace AddressBookService
         public string PersonName { get; set; }
         public string RelationType { get; set; }
         public int Id { get; set; }
+
+        public AddressBookDetails(int PersonId,string Firstname, string Lastname, string Address, string City, string State, int ZipCode, string PHNO, string EmailId)
+        {
+            this.PersonId = PersonId;
+            this.Firstname=Firstname;
+            this.Lastname = Lastname;
+            this.Address = Address;
+            this.City = City;   
+            this.State = State;
+            this.ZipCode = ZipCode;
+            this.PHNO = PHNO;   
+            this.EmailId = EmailId; 
+        }
+        public AddressBookDetails()
+        {
+            this.PersonId = PersonId;
+            this.Firstname = Firstname;
+            this.Lastname = Lastname;
+            this.Address = Address;
+            this.City = City;
+            this.State = State;
+            this.ZipCode = ZipCode;
+            this.PHNO = PHNO;
+            this.EmailId = EmailId;
+        }
     }
 }
