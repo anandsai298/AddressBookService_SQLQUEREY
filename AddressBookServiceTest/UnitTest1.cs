@@ -17,6 +17,11 @@ namespace AddressBookServiceTest
             operation.AddPersonToAddressBook(list);
             DateTime StopTime = DateTime.Now;
             Console.WriteLine("duration without thread:" + (StartTime - StopTime));
+            Console.WriteLine("by using thread");
+            DateTime StartDateTimeThread = DateTime.Now;
+            operation.AddPersonToAddressBookByThread(list);
+            DateTime StopDateTimeThread = DateTime.Now;
+            Console.WriteLine("Duration with threads: " + (StartDateTimeThread - StopDateTimeThread));
         }
     }
 }

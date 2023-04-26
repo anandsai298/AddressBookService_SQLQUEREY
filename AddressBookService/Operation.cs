@@ -147,6 +147,21 @@ namespace AddressBookService
                 Console.WriteLine("Person is added: " + PersonData.Firstname);
             }) ;
         }
+        public void AddPersonToAddressBookByThread(List<AddressBookDetails> Personlist)
+        {
+            Personlist.ForEach(PersonData =>
+            {
+                Task thread = new Task(() =>
+                {
+                    Console.WriteLine("Person is being adding to List : " + PersonData.Firstname);
+                    this.AddPerson(PersonData);
+                    Console.WriteLine("Person is added: " + PersonData.Firstname);
+                });
+                thread.Start();
+            });
+            Console.WriteLine(this.Personlist.Count);
+        }
+
         public void AddPerson(AddressBookDetails Person)
         {
             Personlist.Add(Person);
